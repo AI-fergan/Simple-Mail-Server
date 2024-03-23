@@ -11,6 +11,14 @@ def register(name, password):
       return "Registration completed successfully!"
    else:
       return "User name already exists :("
-  
+   
+@app.route('/delete/<name>/<password>')  
+def delete(name, password):
+   if name in users.keys() and users[name] == password:
+      del users[name]
+      return "User deleted successfully!"
+   else:
+      return "User name not exists or invalid passowrd!"
+
 if __name__ == '__main__': 
    app.run(debug = True) 
