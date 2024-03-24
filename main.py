@@ -32,11 +32,22 @@ def delete(name, password):
 def message(name, password, dest, message):
    if checkPass(name, password):
       if userExists(dest):
-         messagges[dest].append(tuple(name, message))
+         messagges[dest].append(tuple([name, message]))
          return "message sent successfully"
       else:
          return "Dest not exists :("
    return "User name not exists or invalid passowrd!"
 
+@app.route('/home/<name>/<password>')
+def home(name, password):
+   home = []
+   if checkPass(name, password):
+      home.append("<b>" + name + "</b><br>")
+      for message in messagges[name]:
+         home.append("From: " + message[0] + "<br>" + message[1])
+      return '<br><br>'.join(home)
+   else:
+      return "User name not exists or invalid passowrd!"
+   
 if __name__ == '__main__': 
    app.run(debug = True) 
