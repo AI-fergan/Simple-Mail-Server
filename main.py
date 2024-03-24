@@ -10,7 +10,10 @@ def userExists(name):
 def checkPass(name, password):
    return userExists(name) and users[name] == password
 
-# routing the decorator function hello_name 
+@app.route('/')   
+def start(): 
+   return "Welcome to my simple mail server :)"
+ 
 @app.route('/register/<name>/<password>')   
 def register(name, password): 
    if name not in users.keys():
